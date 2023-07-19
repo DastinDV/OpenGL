@@ -11,13 +11,16 @@ set(BIN_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/externals/bin)
 # GLFW
 add_subdirectory(${LIB_DIR}/glfw ${BIN_LIB_DIR}/glfw)
 
+# GLM
+add_subdirectory(${LIB_DIR}/glm ${BIN_LIB_DIR}/glm)
+
 # GLAD
 add_library(GLAD ${LIB_DIR}/glad/src/glad.c)
 target_include_directories(GLAD PUBLIC ${LIB_DIR}/glad/include)
 
 # EXECUTABLE
 add_executable(OpenGLLearn ${SRC_DIR}/cxx/main.cxx ${SRC_DIR}/cxx/engine.cxx
-                           ${INCLUDE_DIR}/engine.hxx)
+                           ${INCLUDE_DIR}/engine.hxx ${INCLUDE_DIR}/stb_image.hxx)
               
 target_include_directories(OpenGLLearn PUBLIC ${INCLUDE_DIR})
-target_link_libraries(OpenGLLearn glfw GLAD)
+target_link_libraries(OpenGLLearn glfw GLAD glm::glm)
